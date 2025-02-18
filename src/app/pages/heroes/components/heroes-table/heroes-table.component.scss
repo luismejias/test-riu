@@ -1,0 +1,42 @@
+.heroes-table {
+    display: flex;
+    flex-direction: column;
+  
+    &__table {
+      min-width:1300px;
+    }
+    &__item-header {
+      display: flex !important;
+      justify-content: center;
+      height: 55px;
+      align-items: center;
+    }
+  
+    &__biography {
+      width: 40%;
+      text-align: justify;
+      padding: 10px 0px;
+    }
+  
+   &__icon-edit {
+     cursor: pointer;
+     color: royalblue;
+     font-size: 30px;
+     margin-left: 8px;
+     &:hover {
+       color: #FFC300;
+       transform: scale(1.2);
+     }
+   }
+  
+   &__icon-delete {
+    cursor: pointer;
+    color: royalblue;
+    font-size: 30px;
+    margin-left: 8px;
+    &:hover {
+      color: #B22222;
+      transform: scale(1.2);
+    }
+  }
+  }
