@@ -1,4 +1,4 @@
-.no-data-found {
+.not-found {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,9 +6,9 @@
     margin-top: 20px;
     
     &__img-box {
-    width: 200px;
+    width: 400px;
     height: 40vh;
-    background-image: url('../../../../assets/images/cancel.png');
+    background-image: url('../../../../assets/images/data-not-found.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

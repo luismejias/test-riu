@@ -5,7 +5,7 @@
     <form [formGroup]="saveHeroeForm" autocomplete="off">
         <mat-form-field class="save-heroe__input">
             <mat-label>Nombre</mat-label>
-            <input matInput formControlName="name" suChangeToUppercase />
+            <input matInput formControlName="name" appChangeToUppercase />
             <mat-error *ngIf="name?.hasError('required')">
                 *Campo <strong>requerido</strong>
             </mat-error>

@@ -12,7 +12,7 @@ import {
 } from '@angular/forms';
 import { Heroe, ImageError, makeHeroe } from '../../models/heroe.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ImageService } from '../../../../shared';
+import { ChangeToUppercaseDirective, ImageService } from '../../../../shared';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
@@ -37,7 +37,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     ReactiveFormsModule,
     MatLabel,
     MatSelect,
-    MatOption
+    MatOption,
+    ChangeToUppercaseDirective
   ],
   templateUrl: './save-heroe.component.html',
   styleUrl: './save-heroe.component.scss',
