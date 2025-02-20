@@ -1,1 +1,22 @@
-<p>delete-heroe works!</p>
+<div class="delete-heroe">
+    <div class="delete-heroe__title-box">
+      <span class="delete-heroe__title">Borrar</span>
+    </div>
+  
+    <div class="delete-heroe__central-text">
+      ¿Esta seguro que desea eliminar el heroe?
+    </div>
+  
+    <div class="delete-heroe__image-box">
+          <img src="/assets/images/trash.png" class="delete-heroe__image"/>
+      </div>
+  
+    <div class="delete-heroe__button-box">
+      <button type="button" class="btn-primary" (click)="delete()" tabindex="-1">
+        Borrar
+      </button>
+      <button type="button" class="btn-secundary delete-heroe__button-space" (click)="close()" tabindex="-1">
+        Cancelar
+      </button>
+    </div>
+  </div>

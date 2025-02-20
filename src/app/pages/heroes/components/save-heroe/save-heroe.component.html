@@ -1,1 +1,67 @@
-<p>save-heroe works!</p>
+<div class="save-heroe">
+    <div class="save-heroe__title-box">
+        <span class="save-heroe__title">Registro</span>
+    </div>
+    <form [formGroup]="saveHeroeForm" autocomplete="off">
+        <mat-form-field class="save-heroe__input">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" suChangeToUppercase />
+            <mat-error *ngIf="name?.hasError('required')">
+                *Campo <strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="save-heroe__input">
+            <mat-label>Biografía</mat-label>
+            <textarea matInput formControlName="biography"></textarea>
+            <mat-error *ngIf="biography?.hasError('required')">
+                Campo <strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="save-heroe__input">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="date" formControlName="appearance" autocomplete="off" readonly>
+            <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
+            <mat-error *ngIf="appearance?.hasError('required')">
+                Campo <strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="save-heroe__input">
+            <mat-label class="label-input">Casa</mat-label>
+            <mat-select formControlName="house">
+                <mat-option *ngFor="let house of houses" [value]="house.value">
+                    {{ house.viewValue }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="house?.hasError('required')">
+                Campo <strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <div class="col-12 button_upload">
+            <label for="uploadImage" class="btn-upload btn-primary">
+                Subir imagen &nbsp;<i class="{{ class }}"></i>
+            </label>
+            <input id="uploadImage" formControlName="image" type="file" accept="image/jpg, image/png, image/jpeg"
+                (change)="validateImage($event)" />
+
+            <mat-error *ngFor="let item of imageErrors" class="save-heroe__imageErrors">
+                {{ item.message }}
+            </mat-error>
+        </div>
+
+        <div class="save-heroe__preview-box" *ngIf="previewUrl">
+            <img [src]="previewUrl" class="save-heroe__preview" />
+        </div>
+        <div class="save-heroe__button-box">
+            <button type="button" class="btn-primary" [disabled]="!saveHeroeForm.valid || buttonDisabled"
+                [ngClass]="{ 'btn-disabled': !saveHeroeForm.valid || buttonDisabled }" (click)="save()" tabindex="-1">
+                Guardar
+            </button>
+            <button type="button" class="btn-secundary save-heroe__button-space" (click)="close()" tabindex="-1">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

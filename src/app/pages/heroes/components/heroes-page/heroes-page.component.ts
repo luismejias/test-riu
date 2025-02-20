@@ -57,9 +57,6 @@ export class HeroesPageComponent {
   private _dialog = inject(MatDialog);
   private heroeService = inject(HeroeService);
   private fb = inject(UntypedFormBuilder);
-   // horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  // verticalPosition: MatSnackBarVerticalPosition = 'top';
-
   constructor() {
     this.searchForm = this.fb?.group({
       searchField: ['']

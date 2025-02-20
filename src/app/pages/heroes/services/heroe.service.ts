@@ -1,37 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { Heroe } from '../models/heroe.model';
 import heroesMock from '../../../../assets/data/heroes.json';
-import { delay } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class HeroeService {
+  private heroesSubject = new BehaviorSubject<Heroe[]>([...heroesMock]);
+  public heroes$ = this.heroesSubject.asObservable(); // Exposición reactiva del estado
 
   getHeroes(): Observable<Heroe[]> {
-    return of(heroesMock as Heroe[]).pipe(delay(1000));
+    return this.heroes$.pipe(delay(500)); // Simula un retraso de 500ms
   }
 
-  addHeroe(heroe: Heroe) {
-    heroesMock.push(heroe);
-    return of(heroesMock as Heroe[]).pipe(delay(1000));
+  addHeroe(heroe: Heroe): Observable<Heroe[]> {
+    const currentHeroes = this.heroesSubject.getValue();
+    const updatedHeroes = [...currentHeroes, heroe];
+    this.heroesSubject.next(updatedHeroes); // Actualiza el estado
+    return of(updatedHeroes).pipe(delay(500));
   }
 
-  editHeroe(heroerNew: Heroe) {
-    let heroeResult = heroesMock.filter((heroe: Heroe) => {
-      return heroe.id !== heroerNew.id;
-    });
-    heroesMock.length = 0;
-    heroesMock.push(heroerNew, ...heroeResult);
-    return of(heroesMock as Heroe[]).pipe(delay(1000));
+  editHeroe(heroerNew: Heroe): Observable<Heroe[]> {
+    const currentHeroes = this.heroesSubject.getValue();
+    const updatedHeroes = currentHeroes.map((heroe) =>
+      heroe.id === heroerNew.id ? heroerNew : heroe
+    );
+    this.heroesSubject.next(updatedHeroes);
+    return of(updatedHeroes).pipe(delay(500));
   }
 
-  deleteHeroe(id: string) {
-    let heroeResult = heroesMock.filter((heroe: Heroe) => {
-      return heroe.id.toString() !== id;
-    });
-    heroesMock.length = 0;
-    heroesMock.push(...heroeResult);
-    return of(heroesMock as Heroe[]).pipe(delay(1000));
+  deleteHeroe(id: string): Observable<Heroe[]> {
+    const currentHeroes = this.heroesSubject.getValue();
+    const updatedHeroes = currentHeroes.filter((heroe) => heroe.id.toString() !== id);
+    this.heroesSubject.next(updatedHeroes);
+    return of(updatedHeroes).pipe(delay(500));
+  }
+  
+  getHeroeById(id: string): Observable<Heroe | undefined> {
+    return this.heroes$.pipe(
+      map((heroes) => heroes.find((heroe) => heroe.id.toString() === id)),
+      delay(500)
+    );
   }
 }

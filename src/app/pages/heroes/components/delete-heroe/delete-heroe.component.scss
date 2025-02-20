@@ -1,0 +1,46 @@
+.delete-heroe {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    padding: 24px;
+    &__title {
+      font-size: 24px;
+      color: #0D47A1;
+    }
+  
+    &__title-box {
+      border-left: 8px solid #B22222;
+      padding-left: 4px;
+      margin-bottom: 20px;
+    }
+  
+    &__central-text {
+      font-size: 18px;
+      color: #212121;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  
+    &__image-box {
+          display: flex;
+          justify-content: center;
+      }
+  
+    &__image {
+  
+      width: "222px";
+    }
+  
+    &__button-box {
+     display: flex;
+     width: 100%;
+     justify-content: center;
+      margin-top: 40px;
+    }
+  
+    &__button-space {
+      margin-left: 10px;
+    }
+   }
