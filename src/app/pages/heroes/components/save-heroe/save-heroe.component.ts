@@ -63,10 +63,9 @@ export class SaveHeroeComponent implements OnInit {
     private imageService: ImageService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    const { name, biography, appearance, house, image } = this.data;    
     this.saveHeroeForm = this.fb.group({
       name: [
-        name,
+        '',
         Validators.compose([
           Validators.maxLength(50),
           Validators.minLength(2),
@@ -74,16 +73,15 @@ export class SaveHeroeComponent implements OnInit {
         ]),
       ],
       biography: [
-        biography,
+        '',
         Validators.compose([Validators.minLength(2), Validators.required]),
       ],
-      appearance: [appearance ? new Date(appearance): '', Validators.required],
+      appearance: ['', Validators.required],
       image: [''],
-      house: [house, Validators.compose([Validators.required])],
+      house: [Validators.compose([Validators.required])],
     });
   }
   ngOnInit() {
-    this.idHeroe = this.data.id;
     this.setDefaultImage();
   }
 
@@ -109,8 +107,9 @@ export class SaveHeroeComponent implements OnInit {
 
   save() {
     const { name, biography, appearance, house } = this.saveHeroeForm.value;
+    const generateId = () => Math.random().toString(36).substring(2, 18);
     const heroe: Heroe = makeHeroe({
-      id: this.idHeroe,
+      id: generateId(),
       image: this.previewUrl,
       name,
       biography,

@@ -11,7 +11,6 @@ export class ImageService {
   validateImage(obj: { target: { files: any[]; }; }): ImageError[] {
     this.imageErrors = [];
     let uploadFile = obj.target.files[0];
-    // convertir tamaño en MB
     const size = uploadFile.size / 1024 / 1024;
     if (!uploadFile.type.match(/image\/*/)) {
       this.imageErrors.push({ key: 'notImage', message: 'El archivo a adjuntar no es una imagen' });

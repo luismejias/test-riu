@@ -9,16 +9,16 @@ import heroesMock from '../../../../assets/data/heroes.json';
 })
 export class HeroeService {
   private heroesSubject = new BehaviorSubject<Heroe[]>([...heroesMock]);
-  public heroes$ = this.heroesSubject.asObservable(); // Exposición reactiva del estado
+  public heroes$ = this.heroesSubject.asObservable();
 
   getHeroes(): Observable<Heroe[]> {
-    return this.heroes$.pipe(delay(500)); // Simula un retraso de 500ms
+    return this.heroes$.pipe(delay(500));
   }
 
-  addHeroe(heroe: Heroe): Observable<Heroe[]> {
+  addHeroe(heroe: Heroe): Observable<Heroe[]> {    
     const currentHeroes = this.heroesSubject.getValue();
     const updatedHeroes = [...currentHeroes, heroe];
-    this.heroesSubject.next(updatedHeroes); // Actualiza el estado
+    this.heroesSubject.next(updatedHeroes);
     return of(updatedHeroes).pipe(delay(500));
   }
 

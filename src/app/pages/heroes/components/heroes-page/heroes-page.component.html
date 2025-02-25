@@ -1,22 +1,24 @@
 <div class="heroes-page">
-    <form [formGroup]="searchForm" autocomplete="off" class="heroes-page__search-form">
-      <mat-form-field appearance="fill" style="width: 50%;">
-        <mat-label>Buscar</mat-label>
-        <mat-icon matSuffix>search</mat-icon>
-        <input matInput formControlName="searchField" placeholder="Búsqueda por Nombre o Id"/>
-      </mat-form-field>
-      <div class="btn-primary" (click)="addHeroe();">
-        Agregar
-      </div>
-    </form>
-    <div class="heroes-page__loading-shade" *ngIf="loadingData">
+  <form [formGroup]="searchForm" autocomplete="off" class="heroes-page__search-form">
+    <mat-form-field appearance="fill" style="width: 50%;">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matSuffix>search</mat-icon>
+      <input matInput formControlName="searchField" placeholder="Búsqueda por Nombre o Id" />
+    </mat-form-field>
+    <div class="btn-primary" (click)="addHeroe();">
+      Agregar
+    </div>
+  </form>
+  @if (loadingData) {
+    <div class="heroes-page__loading-shade">
       <mat-spinner></mat-spinner>
     </div>
-    <app-heroes-table  
-      [dataSource]="dataSource"
-      (handleDataEdit)="editHeroe($event);"
-      (handleDataDelete)="deleteHeroe($event);" 
-      *ngIf="!loadingData && dataSourceLength">
-    </app-heroes-table>
-    <app-not-found *ngIf="!loadingData && !dataSourceLength"></app-not-found>
-  </div>
+  }  
+  @else if (!loadingData && dataSourceLength) {
+  <app-heroes-table [dataSource]="dataSource" (handleDataEdit)="editHeroe($event);"
+    (handleDataDelete)="deleteHeroe($event);">
+  </app-heroes-table>
+  }@else if(!loadingData && !dataSourceLength){
+  <app-not-found></app-not-found>
+  }
+</div>
